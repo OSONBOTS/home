@@ -27,7 +27,7 @@
       padding: 30px;
       border-radius: 12px;
       width: 100%;
-      max-width: 500px;
+      max-width: 550px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     }
 
@@ -49,8 +49,7 @@
       font-weight: 500;
     }
 
-    input,
-    textarea {
+    input, textarea, select {
       width: 100%;
       padding: 12px;
       margin-bottom: 15px;
@@ -59,8 +58,7 @@
       font-size: 1em;
     }
 
-    input:focus,
-    textarea:focus {
+    input:focus, textarea:focus, select:focus {
       outline: none;
       box-shadow: 0 0 5px #ffffffaa;
     }
@@ -112,21 +110,32 @@
       <input type="text" id="name" name="name" required />
 
       <label for="phone">Номер WhatsApp:</label>
-      <input
-        type="tel"
-        id="phone"
-        name="phone"
-        placeholder="+992012345678"
-        required
-      />
+      <input type="tel" id="phone" name="phone" placeholder="+998901234567" required />
+
+      <label for="tariff">Выберите тариф:</label>
+      <select id="tariff" name="tariff" required>
+        <option value="" disabled selected>-- Выберите тариф --</option>
+        <option value="Lite — 70 TJS/месяц">Lite — 70 TJS/месяц</option>
+        <option value="Service — 1000 TJS/навсегда">Service — 1000 TJS/навсегда</option>
+        <option value="OsonGPT — 880 TJS/месяц">OsonGPT — 880 TJS/месяц</option>
+      </select>
+
+      <label for="business">Направление бизнеса:</label>
+      <select id="business" name="business" required>
+        <option value="" disabled selected>-- Выберите направление --</option>
+        <option value="Ресторан / Кафе">Ресторан / Кафе</option>
+        <option value="Онлайн-магазин">Онлайн-магазин</option>
+        <option value="Образование / Курсы">Образование / Курсы</option>
+        <option value="Фитнес / Спорт">Фитнес / Спорт</option>
+        <option value="IT / Технологии">IT / Технологии</option>
+        <option value="Красота / Спа">Красота / Спа</option>
+        <option value="Туризм / Путешествия">Туризм / Путешествия</option>
+        <option value="Услуги / Консалтинг">Услуги / Консалтинг</option>
+        <option value="Другое">Другое</option>
+      </select>
 
       <label for="question">Ваш вопрос:</label>
-      <textarea
-        id="question"
-        name="question"
-        placeholder="Напишите ваш вопрос здесь..."
-        required
-      ></textarea>
+      <textarea id="question" name="question" placeholder="Напишите ваш вопрос здесь..." required></textarea>
 
       <button type="submit">Отправить заявку</button>
     </form>
@@ -138,9 +147,11 @@
 
       const name = document.getElementById("name").value.trim();
       const phone = document.getElementById("phone").value.trim();
+      const tariff = document.getElementById("tariff").value;
+      const business = document.getElementById("business").value;
       const question = document.getElementById("question").value.trim();
 
-      if (!name || !phone || !question) {
+      if (!name || !phone || !tariff || !business || !question) {
         alert("Пожалуйста, заполните все поля.");
         return;
       }
@@ -150,7 +161,10 @@
 
 👤 Имя: ${name}
 📞 WhatsApp: ${phone}
-❓ Вопрос:  ${question}
+📦 Тариф: ${tariff}
+🏢 Бизнес: ${business}
+❓ Вопрос:
+${question}
       `;
 
       // 🔴 Вставь свои данные сюда:

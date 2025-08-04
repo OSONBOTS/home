@@ -14,7 +14,7 @@
       margin: 0;
       padding: 0;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background-color: rgb(62, 33, 183); /* фон */
+      background-color: rgb(62, 33, 183);
       color: #fff;
       display: flex;
       justify-content: center;
@@ -99,6 +99,11 @@
       h3 {
         font-size: 16px;
       }
+
+      .phone-group {
+        flex-direction: column;
+        gap: 5px;
+      }
     }
   </style>
 </head>
@@ -111,7 +116,16 @@
       <input type="text" id="name" name="name" required />
 
       <label for="phone">Номер WhatsApp:</label>
-      <input type="tel" id="phone" name="phone" placeholder="+998901234567" required />
+      <div class="phone-group" style="display: flex; gap: 10px; align-items: center; margin-bottom: 15px;">
+        <select id="country-code" style="flex: 0 0 160px; padding: 12px; border-radius: 6px; border: none;">
+          <option value="+992">🇹🇯 Таджикистан +992</option>
+          <option value="+998">🇺🇿 Узбекистан +998</option>
+          <option value="+996">🇰🇬 Кыргызстан +996</option>
+          <option value="+7">🇷🇺 Россия +7</option>
+          <option value="+7-2">🇰🇿 Казахстан +7</option>
+        </select>
+        <input type="tel" id="phone" name="phone" placeholder="901234567" required style="flex: 1;" />
+      </div>
 
       <label for="tariff">Выберите тариф:</label>
       <select id="tariff" name="tariff" required>
@@ -132,6 +146,16 @@
         <option value="Красота / Спа">Красота / Спа</option>
         <option value="Туризм / Путешествия">Туризм / Путешествия</option>
         <option value="Услуги / Консалтинг">Услуги / Консалтинг</option>
+        <option value="Авто / Мото">Авто / Мото</option>
+        <option value="Медицина / Здоровье">Медицина / Здоровье</option>
+        <option value="Недвижимость">Недвижимость</option>
+        <option value="Финансы / Банки">Финансы / Банки</option>
+        <option value="Хендмейд / Ремесло">Хендмейд / Ремесло</option>
+        <option value="Мероприятия / Ивенты">Мероприятия / Ивенты</option>
+        <option value="Геймдев / Игры">Геймдев / Игры</option>
+        <option value="Доставка / Курьеры">Доставка / Курьеры</option>
+        <option value="Агрономия / Сельское хозяйство">Агрономия / Сельское хозяйство</option>
+        <option value="Маркетинг / Реклама">Маркетинг / Реклама</option>
         <option value="Другое">Другое</option>
       </select>
 
@@ -147,7 +171,11 @@
       e.preventDefault();
 
       const name = document.getElementById("name").value.trim();
-      const phone = document.getElementById("phone").value.trim();
+      const codeSelect = document.getElementById("country-code");
+      const rawCode = codeSelect.value;
+      const code = rawCode.includes("+7-2") ? "+7" : rawCode;
+      const country = codeSelect.options[codeSelect.selectedIndex].text;
+      const phone = code + document.getElementById("phone").value.trim();
       const tariff = document.getElementById("tariff").value;
       const business = document.getElementById("business").value;
       const question = document.getElementById("question").value.trim();
@@ -161,14 +189,13 @@
 📝 Новая заявка с сайта OsonBots:
 
 👤 Имя: ${name}
-📞 WhatsApp: ${phone}
+📞 WhatsApp: ${phone} (${country})
 📦 Тариф: ${tariff}
 🏢 Бизнес: ${business}
 ❓ Вопрос:
 ${question}
       `;
 
-      // 🔴 Вставь свои данные сюда:
       const token = "7355029716:AAGaYCXgzVyO21tC3ApRBuUiXUvWMHxCqfY";
       const chat_id = "7849292154";
 

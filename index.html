@@ -101,17 +101,30 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.3);
     }
 
+    .phone-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
     .phone-group select {
       background: rgba(255, 255, 255, 0.15);
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: #fff;
       border-radius: 10px;
       transition: all 0.3s ease;
+      flex: 0 0 160px;
+      padding: 12px;
     }
 
     .phone-group select:focus {
       border-color: #fff;
       background: rgba(255, 255, 255, 0.25);
+    }
+
+    .phone-group input {
+      flex: 1;
     }
 
     option {
@@ -128,9 +141,11 @@
       h3 {
         font-size: 16px;
       }
-      .phone-group {
-        flex-direction: column;
-        gap: 5px;
+      .phone-group select {
+        flex: 0 0 120px;
+      }
+      .phone-group input {
+        flex: 1;
       }
     }
   </style>
@@ -144,15 +159,15 @@
       <input type="text" id="name" name="name" placeholder="Ваше имя" required />
 
       <label for="phone">Номер WhatsApp:</label>
-      <div class="phone-group" style="display: flex; gap: 10px; align-items: center; margin-bottom: 18px;">
-        <select id="country-code" style="flex: 0 0 160px; padding: 12px;">
+      <div class="phone-group">
+        <select id="country-code">
           <option value="+992">🇹🇯 Таджикистан +992</option>
           <option value="+998">🇺🇿 Узбекистан +998</option>
           <option value="+996">🇰🇬 Кыргызстан +996</option>
           <option value="+7">🇷🇺 Россия +7</option>
           <option value="+7-2">🇰🇿 Казахстан +7</option>
         </select>
-        <input type="tel" id="phone" name="phone" placeholder="901234567" required style="flex: 1;" />
+        <input type="tel" id="phone" name="phone" placeholder="901234567" required />
       </div>
 
       <label for="tariff">Выберите тариф:</label>
